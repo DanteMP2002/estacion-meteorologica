@@ -1,0 +1,1300 @@
+/* =====================================================
+   GENERAL
+===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+
+    margin: 0;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eef2f7,
+            #dfe5ec
+        );
+
+    color: #172033;
+
+    min-height: 100vh;
+
+}
+
+
+.container {
+
+    width: 94%;
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    padding: 25px 0 40px;
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header {
+
+    position: relative;
+
+    background: #ffffff;
+
+    border: 1px solid #d5dce5;
+
+    border-radius: 14px;
+
+    padding: 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    box-shadow:
+        0 5px 18px rgba(0,0,0,0.06);
+
+}
+
+
+.header-info h1 {
+
+    margin: 0 0 6px;
+
+    font-size: 28px;
+
+    color: #172033;
+
+}
+
+
+.header-info p {
+
+    margin: 0;
+
+    color: #667085;
+
+    font-size: 14px;
+
+}
+
+
+/* =====================================================
+   RELOJ
+===================================================== */
+
+.clock-container {
+
+    text-align: center;
+
+    background: #172033;
+
+    color: #ffffff;
+
+    padding: 12px 22px;
+
+    border-radius: 10px;
+
+    min-width: 145px;
+
+}
+
+
+#digital-clock {
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+}
+
+
+#digital-date {
+
+    margin-top: 5px;
+
+    font-size: 12px;
+
+    color: #cbd5e1;
+
+}
+
+
+/* =====================================================
+   ESTADO
+===================================================== */
+
+.status {
+
+    position: absolute;
+
+    top: 10px;
+
+    right: 12px;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    color: #16803c;
+
+}
+
+
+.status-dot {
+
+    display: inline-block;
+
+    width: 8px;
+
+    height: 8px;
+
+    background: #20b45a;
+
+    border-radius: 50%;
+
+    margin-right: 5px;
+
+}
+
+
+/* =====================================================
+   SECCIÓN ACTUAL
+===================================================== */
+
+.current-section {
+
+    margin-top: 20px;
+
+}
+
+
+.section-title {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 12px;
+
+}
+
+
+.section-title h2 {
+
+    margin: 0;
+
+    font-size: 20px;
+
+}
+
+
+.live-indicator {
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    color: #d62828;
+
+}
+
+
+/* =====================================================
+   CARDS
+===================================================== */
+
+.cards {
+
+    display: grid;
+
+    /* auto-fit: se acomoda solo a 3 o 4 tarjetas
+       (temperatura, humedad, presión y, si hay dato,
+       batería) sin dejar huecos raros */
+    grid-template-columns:
+        repeat(auto-fit, minmax(200px, 1fr));
+
+    gap: 18px;
+
+}
+
+
+.card {
+
+    position: relative;
+
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border-radius: 14px;
+
+    padding: 25px;
+
+    border: 1px solid #d9dfe7;
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,0.05);
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+
+}
+
+
+.card:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,0.09);
+
+}
+
+
+/* =====================================================
+   COLORES DE LAS CARDS
+===================================================== */
+
+.temperature-card {
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff 45%,
+            #ffe3e3
+        );
+
+    border-left:
+        5px solid #e53935;
+
+}
+
+
+.humidity-card {
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff 45%,
+            #dff7f5
+        );
+
+    border-left:
+        5px solid #009688;
+
+}
+
+
+.pressure-card {
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff 45%,
+            #eee4f8
+        );
+
+    border-left:
+        5px solid #7048a8;
+
+}
+
+
+.battery-card {
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff 45%,
+            #fff4d9
+        );
+
+    border-left:
+        5px solid #d69e00;
+
+}
+
+
+/* =====================================================
+   BADGE DE BATERÍA (header)
+===================================================== */
+/*
+   Se muestra en el header de index.php, graficas.php
+   e historial.php (includes/header_bateria.php).
+   Cambia de color según el nivel:
+     - battery-alta   -> verde  (> 60%)
+     - battery-media  -> ámbar (21% a 60%)
+     - battery-baja   -> rojo  (<= 20%)
+*/
+
+.battery-badge {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 10px 18px;
+
+    border-radius: 10px;
+
+    font-weight: bold;
+
+    font-size: 16px;
+
+    min-width: 90px;
+
+    justify-content: center;
+
+}
+
+
+.battery-icon {
+
+    font-size: 18px;
+
+}
+
+
+.battery-alta {
+
+    background: #e3f7e9;
+
+    color: #16803c;
+
+    border: 1px solid #b6e6c4;
+
+}
+
+
+.battery-media {
+
+    background: #fff6dd;
+
+    color: #a16a00;
+
+    border: 1px solid #f0dca0;
+
+}
+
+
+.battery-baja {
+
+    background: #fde6e6;
+
+    color: #c62828;
+
+    border: 1px solid #f3b7b7;
+
+    /* Parpadeo suave para llamar la atención cuando
+       la batería está baja */
+    animation: batteryPulse 1.6s infinite;
+
+}
+
+
+.battery-desconocida {
+
+    background: #eef1f5;
+
+    color: #64748b;
+
+    border: 1px solid #d8dee7;
+
+}
+
+
+@keyframes batteryPulse {
+
+    0%, 100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.55;
+    }
+
+}
+
+
+/* =====================================================
+   ICONOS
+===================================================== */
+
+.card-icon {
+
+    font-size: 28px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.card-title {
+
+    color: #5d6878;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+}
+
+
+.card-value {
+
+    margin-top: 8px;
+
+    font-size: 38px;
+
+    font-weight: bold;
+
+    color: #172033;
+
+}
+
+
+.card-unit {
+
+    font-size: 17px;
+
+    color: #667085;
+
+    font-weight: normal;
+
+}
+
+
+/* =====================================================
+   ÚLTIMA ACTUALIZACIÓN
+===================================================== */
+
+.last-update {
+
+    margin-top: 12px;
+
+    padding: 12px 16px;
+
+    background: #ffffff;
+
+    border-radius: 8px;
+
+    border: 1px solid #d9dfe7;
+
+    color: #667085;
+
+    font-size: 13px;
+
+}
+
+
+.last-update strong {
+
+    color: #172033;
+
+}
+
+
+/* =====================================================
+   ESTADÍSTICAS
+===================================================== */
+
+.stats {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 15px;
+
+    margin-top: 20px;
+
+}
+
+
+.stat-card {
+
+    background: #ffffff;
+
+    border: 1px solid #d9dfe7;
+
+    border-radius: 12px;
+
+    padding: 16px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+}
+
+
+.stat-icon {
+
+    font-size: 25px;
+
+}
+
+
+.stat-label {
+
+    display: block;
+
+    color: #667085;
+
+    font-size: 12px;
+
+}
+
+
+.stat-card strong {
+
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 21px;
+
+    color: #172033;
+
+}
+
+
+/* =====================================================
+   NAVEGACIÓN
+===================================================== */
+
+.navigation {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 18px;
+
+    margin-top: 20px;
+
+}
+
+
+.nav-button {
+
+    text-decoration: none;
+
+    background: #172033;
+
+    color: #ffffff;
+
+    border-radius: 12px;
+
+    padding: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    transition:
+        transform 0.2s,
+        background 0.2s;
+
+}
+
+
+.nav-button:hover {
+
+    transform: translateY(-2px);
+
+    background: #26344d;
+
+}
+
+
+.nav-button > span {
+
+    font-size: 30px;
+
+}
+
+
+.nav-button strong {
+
+    display: block;
+
+    font-size: 17px;
+
+}
+
+
+.nav-button small {
+
+    display: block;
+
+    margin-top: 4px;
+
+    color: #cbd5e1;
+
+}
+
+
+/* =====================================================
+   SIN DATOS
+===================================================== */
+
+.no-data {
+
+    margin-top: 20px;
+
+    background: #ffffff;
+
+    border: 1px solid #d9dfe7;
+
+    border-radius: 12px;
+
+    padding: 40px;
+
+    text-align: center;
+
+}
+
+
+.no-data h2 {
+
+    margin: 0 0 8px;
+
+}
+
+
+.no-data p {
+
+    color: #667085;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 800px) {
+
+    .header {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+
+    .clock-container {
+
+        align-self: stretch;
+
+    }
+
+
+    .cards {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    .container {
+
+        width: 96%;
+
+        padding-top: 12px;
+
+    }
+
+
+    .header {
+
+        padding: 18px;
+
+    }
+
+
+    .header-info h1 {
+
+        font-size: 22px;
+
+    }
+
+
+    .card-value {
+
+        font-size: 32px;
+
+    }
+
+
+    .stats,
+    .navigation {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+/* =====================================================
+   TABLA DE MEDICIONES
+===================================================== */
+
+.table-container {
+
+    margin-top: 20px;
+
+    background: #ffffff;
+
+    border: 1px solid #d9dfe7;
+
+    border-radius: 14px;
+
+    padding: 20px;
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,0.05);
+
+    overflow-x: auto;
+
+}
+
+
+.table-container h2 {
+
+    margin: 0 0 15px;
+
+    color: #172033;
+
+    font-size: 20px;
+
+}
+
+
+.table-container table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    font-size: 13px;
+
+}
+
+
+.table-container th {
+
+    background: #172033;
+
+    color: #ffffff;
+
+    padding: 11px 12px;
+
+    text-align: left;
+
+    font-weight: 600;
+
+}
+
+
+.table-container td {
+
+    padding: 10px 12px;
+
+    border-bottom: 1px solid #e1e5eb;
+
+    color: #172033;
+
+    background: #ffffff;
+
+}
+
+
+.table-container tr:last-child td {
+
+    border-bottom: none;
+
+}
+
+
+.table-container tbody tr:hover td {
+
+    background: #f4f6f9;
+
+}
+
+
+/* =====================================================
+   NAVEGACIÓN DEL INDEX
+===================================================== */
+
+.main-nav {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin: 20px 0;
+
+    flex-wrap: wrap;
+
+}
+
+
+.main-nav a {
+
+    display: inline-block;
+
+    padding: 10px 20px;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+
+    background: #172033;
+
+    color: #ffffff;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    border: 1px solid #26344d;
+
+    transition:
+        background 0.2s,
+        transform 0.2s;
+
+}
+
+
+.main-nav a:hover {
+
+    background: #26344d;
+
+    transform: translateY(-1px);
+
+}
+
+
+/* =====================================================
+   MÓVIL - TABLA
+===================================================== */
+
+@media (max-width: 550px) {
+
+    .table-container {
+
+        padding: 12px;
+
+    }
+
+
+    .table-container h2 {
+
+        font-size: 17px;
+
+    }
+
+
+    .table-container table {
+
+        font-size: 12px;
+
+    }
+
+
+    .table-container th,
+    .table-container td {
+
+        padding: 9px 7px;
+
+    }
+
+
+    .main-nav {
+
+        gap: 7px;
+
+    }
+
+
+    .main-nav a {
+
+        padding: 9px 14px;
+
+        font-size: 12px;
+
+    }
+
+}
+/* =====================================================
+   NAVEGACIÓN PRINCIPAL
+===================================================== */
+
+.main-nav {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin: 20px 0;
+
+    flex-wrap: wrap;
+
+}
+
+
+.main-nav a {
+
+    display: inline-block;
+
+    padding: 10px 20px;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+
+    background: #172033;
+
+    color: #ffffff;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    border: 1px solid #26344d;
+
+    transition:
+        background 0.2s,
+        transform 0.2s;
+
+}
+
+
+.main-nav a:hover {
+
+    background: #26344d;
+
+    transform: translateY(-1px);
+
+}
+
+
+.main-nav a:active {
+
+    transform: translateY(0);
+
+}
+
+
+/* =====================================================
+   MÓVIL
+===================================================== */
+
+@media (max-width: 550px) {
+
+    .main-nav {
+
+        gap: 7px;
+
+        margin: 15px 0;
+
+    }
+
+
+    .main-nav a {
+
+        padding: 9px 14px;
+
+        font-size: 12px;
+
+    }
+
+}
+/* =====================================================
+   ESTADO DE SINCRONIZACIÓN
+===================================================== */
+
+.sync-status {
+
+    margin: 10px 0 15px;
+
+    text-align: center;
+
+    font-size: 12px;
+
+    color: #667085;
+
+}
+
+
+.sync-success {
+
+    color: #16803c;
+
+}
+
+
+.sync-ok {
+
+    color: #667085;
+
+}
+
+
+.sync-error {
+
+    color: #c62828;
+
+}
+
+
+/* =====================================================
+   BOTÓN SINCRONIZAR
+===================================================== */
+
+.main-nav button {
+
+    display: inline-block;
+
+    padding: 10px 20px;
+
+    border-radius: 8px;
+
+    background: #172033;
+
+    color: #ffffff;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    border: 1px solid #26344d;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s,
+        transform 0.2s;
+
+}
+
+
+.main-nav button:hover {
+
+    background: #26344d;
+
+    transform: translateY(-1px);
+
+}
+
+
+.main-nav button:disabled {
+
+    opacity: 0.6;
+
+    cursor: wait;
+
+    transform: none;
+
+}
+
+
+/* =====================================================
+   ÚLTIMA MEDICIÓN
+===================================================== */
+
+.section-title .last-update {
+
+    margin: 0;
+
+    padding: 8px 12px;
+
+    background: #f8fafc;
+
+    border: 1px solid #d9dfe7;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+
+}
+
+
+.section-title .last-update strong {
+
+    color: #172033;
+
+}
+
+
+/* =====================================================
+   TABLA
+===================================================== */
+
+.table-container {
+
+    margin-top: 20px;
+
+    background: #ffffff;
+
+    border: 1px solid #d9dfe7;
+
+    border-radius: 12px;
+
+    padding: 18px;
+
+}
+
+
+.table-container h2 {
+
+    margin-top: 0;
+
+    color: #172033;
+
+}
+
+
+.table-scroll {
+
+    overflow-x: auto;
+
+}
+
+
+.table-container table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+}
+
+
+.table-container th {
+
+    background: #172033;
+
+    color: #ffffff;
+
+    padding: 10px;
+
+    font-size: 12px;
+
+    text-align: left;
+
+}
+
+
+.table-container td {
+
+    padding: 10px;
+
+    border-bottom: 1px solid #e2e6ec;
+
+    color: #344054;
+
+    font-size: 12px;
+
+}
+
+
+.table-container tr:last-child td {
+
+    border-bottom: none;
+
+}
+
+
+/* =====================================================
+   MÓVIL
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .section-title {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 8px;
+
+    }
+
+
+    .section-title .last-update {
+
+        width: 100%;
+
+        box-sizing: border-box;
+
+    }
+
+
+    .main-nav {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+    }
+
+
+    .main-nav a,
+    .main-nav button {
+
+        width: 100%;
+
+        box-sizing: border-box;
+
+        text-align: center;
+
+    }
+
+}

@@ -1,0 +1,390 @@
+/* =====================================================
+   REPRODUCTOR DE MÚSICA - ESTACIÓN METEOROLÓGICA
+===================================================== */
+
+#music-player {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 9999;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* =====================================================
+   BOTÓN PRINCIPAL
+===================================================== */
+
+#music-toggle {
+    width: 58px;
+    height: 58px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #172033;
+    color: #ffffff;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 28px;
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.25);
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+#music-toggle:hover {
+    transform: scale(1.06);
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.30);
+}
+
+
+/* =====================================================
+   PANEL
+===================================================== */
+
+#music-panel {
+    position: absolute;
+
+    right: 0;
+    bottom: 70px;
+
+    width: 270px;
+
+    background: #ffffff;
+
+    border: 1px solid #d9dfe7;
+    border-radius: 14px;
+
+    padding: 16px;
+
+    box-shadow:
+        0 10px 35px rgba(0, 0, 0, 0.18);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform:
+        translateY(10px)
+        scale(0.97);
+
+    transform-origin: bottom right;
+
+    transition:
+        opacity 0.2s,
+        transform 0.2s,
+        visibility 0.2s;
+
+    color: #172033;
+}
+
+#music-player.open #music-panel {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+
+/* =====================================================
+   ENCABEZADO
+===================================================== */
+
+.music-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 12px;
+
+    font-size: 15px;
+
+    font-weight: bold;
+}
+
+#music-close {
+
+    border: none;
+
+    background: transparent;
+
+    color: #667085;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    line-height: 1;
+}
+
+#music-close:hover {
+
+    color: #172033;
+}
+
+
+/* =====================================================
+   DISCO DE VINILO
+===================================================== */
+
+.vinyl-container {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    margin: 8px 0 15px;
+}
+
+#vinyl {
+
+    width: 105px;
+    height: 105px;
+
+    border-radius: 50%;
+
+    position: relative;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #c7c7c7 0 5px,
+            #333 6px 9px,
+            #111 10px 14px,
+            #202020 15px 22px,
+            #111 23px 29px,
+            #202020 30px 38px,
+            #111 39px 47px,
+            #202020 48px 52px
+        );
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.30);
+
+    transition:
+        transform 0.3s;
+}
+
+
+/* Brillo del vinilo */
+
+#vinyl::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 8px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            transparent 35%,
+            rgba(255,255,255,0.12) 50%,
+            transparent 65%
+        );
+
+    pointer-events: none;
+}
+
+
+/* Centro */
+
+.vinyl-center {
+
+    position: absolute;
+
+    width: 28px;
+    height: 28px;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #e53935 0 5px,
+            #d4d4d4 6px 8px,
+            #222 9px 14px
+        );
+
+    border: 2px solid #111;
+
+    z-index: 2;
+}
+
+
+/* =====================================================
+   ANIMACIÓN DEL VINILO
+===================================================== */
+
+#vinyl.playing {
+
+    animation:
+        vinyl-spin 3s linear infinite;
+}
+
+@keyframes vinyl-spin {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* =====================================================
+   CONTROLES
+===================================================== */
+
+.music-controls {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 14px;
+}
+
+#music-play {
+
+    width: 42px;
+    height: 42px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #172033;
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+    font-size: 17px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+#music-play:hover {
+
+    background: #26344d;
+}
+
+#music-status {
+
+    font-size: 12px;
+
+    color: #667085;
+}
+
+
+/* =====================================================
+   VOLUMEN
+===================================================== */
+
+.volume-control {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 15px;
+
+    margin-bottom: 12px;
+}
+
+#music-volume {
+
+    flex: 1;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   REPETIR
+===================================================== */
+
+.repeat-control {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    font-size: 12px;
+
+    color: #4b5563;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   MÓVIL
+===================================================== */
+
+@media (max-width: 500px) {
+
+    #music-player {
+
+        right: 12px;
+
+        bottom: 12px;
+    }
+
+    #music-toggle {
+
+        width: 52px;
+        height: 52px;
+
+        font-size: 25px;
+    }
+
+    #music-panel {
+
+        width: 250px;
+
+        bottom: 63px;
+    }
+
+}

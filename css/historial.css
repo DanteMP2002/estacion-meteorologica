@@ -1,0 +1,255 @@
+/* =====================================================
+   HISTORIAL
+===================================================== */
+
+.history-chart-card,
+.history-table-card {
+
+    background: #f8fafc;
+
+    border: 1px solid #d7dde5;
+
+    border-radius: 10px;
+
+    padding: 18px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.history-chart-card h2,
+.history-table-card h2 {
+
+    margin: 0 0 15px;
+
+    color: #172033;
+
+    font-size: 17px;
+
+}
+
+
+.chart-wrapper {
+
+    position: relative;
+
+    width: 100%;
+
+    height: 380px;
+
+    background: #ffffff;
+
+    border: 1px solid #d8dee7;
+
+    border-radius: 8px;
+
+    padding: 10px;
+
+    box-sizing: border-box;
+
+}
+
+
+/* =====================================================
+   TABLA
+===================================================== */
+
+.table-scroll {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+}
+
+
+table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    background: #ffffff;
+
+    color: #172033;
+
+    font-size: 13px;
+
+}
+
+
+thead {
+
+    background: #172033;
+
+    color: #ffffff;
+
+}
+
+
+th {
+
+    /* Tabla creció de 7 a 10 columnas (min/máx de
+       humedad y presión + batería), así que se
+       reduce el padding lateral para que quepa mejor */
+    padding: 12px 8px;
+
+    text-align: center;
+
+    white-space: nowrap;
+
+    font-size: 12px;
+
+}
+
+
+td {
+
+    padding: 10px 8px;
+
+    text-align: center;
+
+    border-bottom: 1px solid #e1e5ea;
+
+    white-space: nowrap;
+
+}
+
+
+tbody tr:nth-child(even) {
+
+    background: #f4f6f8;
+
+}
+
+
+tbody tr:hover {
+
+    background: #e8edf3;
+
+}
+
+
+/* =====================================================
+   COLORES DE COLUMNAS
+===================================================== */
+/*
+   Orden actual de columnas (12 en total):
+     1  Fecha
+     2  Temp. promedio   -> rojo, negrita
+     3  Temp. mín.       -> azul
+     4  Temp. máx.       -> rojo
+     5  Humedad promedio -> verde azulado, negrita
+     6  Humedad mín.     -> azul
+     7  Humedad máx.     -> verde azulado
+     8  Presión promedio -> morado, negrita
+     9  Presión mín.     -> azul
+     10 Presión máx.     -> morado
+     11 Batería          -> ámbar, negrita
+     12 Mediciones       -> color por defecto
+*/
+
+td:nth-child(2) {
+
+    color: #c62828;
+
+    font-weight: 600;
+
+}
+
+
+td:nth-child(3),
+td:nth-child(6),
+td:nth-child(9) {
+
+    /* Todas las columnas de "mínimo" comparten
+       el mismo azul, igual que ya pasaba con
+       temperatura */
+    color: #1976d2;
+
+}
+
+
+td:nth-child(4) {
+
+    color: #c62828;
+
+}
+
+
+td:nth-child(5) {
+
+    color: #008f7a;
+
+    font-weight: 600;
+
+}
+
+
+td:nth-child(7) {
+
+    color: #008f7a;
+
+}
+
+
+td:nth-child(8) {
+
+    color: #7048a8;
+
+    font-weight: 600;
+
+}
+
+
+td:nth-child(10) {
+
+    color: #7048a8;
+
+}
+
+
+td:nth-child(11) {
+
+    color: #a16a00;
+
+    font-weight: 600;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 800px) {
+
+    .chart-wrapper {
+
+        height: 320px;
+
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .history-chart-card,
+    .history-table-card {
+
+        padding: 10px;
+
+    }
+
+
+    .chart-wrapper {
+
+        height: 280px;
+
+        padding: 5px;
+
+    }
+
+}

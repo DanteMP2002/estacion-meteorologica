@@ -1,0 +1,506 @@
+/* =====================================================
+   GRÁFICAS - ESTACIÓN METEOROLÓGICA
+===================================================== */
+
+
+/* =====================================================
+   NAVEGACIÓN
+===================================================== */
+
+.main-nav {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin: 20px 0;
+
+    flex-wrap: wrap;
+
+}
+
+
+.main-nav a {
+
+    display: inline-block;
+
+    padding: 9px 17px;
+
+    text-decoration: none;
+
+    border-radius: 7px;
+
+    background: #1d2738;
+
+    color: #ffffff;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    border: 1px solid #334155;
+
+    transition: 0.2s;
+
+}
+
+
+.main-nav a:hover {
+
+    background: #334155;
+
+    color: #ffffff;
+
+}
+
+
+/* =====================================================
+   SELECTOR DE FECHA
+===================================================== */
+
+.date-selector {
+
+    background: #f8fafc;
+
+    border: 1px solid #d7dde5;
+
+    border-radius: 10px;
+
+    padding: 18px 20px;
+
+    margin-bottom: 14px;
+
+    color: #172033;
+
+}
+
+
+.date-selector form {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+
+}
+
+
+.date-selector label {
+
+    color: #172033;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+}
+
+
+.date-selector input {
+
+    padding: 9px 11px;
+
+    border: 1px solid #aeb7c4;
+
+    border-radius: 6px;
+
+    background: #ffffff;
+
+    color: #172033;
+
+    font-size: 13px;
+
+}
+
+
+.date-selector button {
+
+    padding: 9px 18px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: #172033;
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+}
+
+
+.date-selector button:hover {
+
+    background: #2c3b52;
+
+}
+
+
+/* =====================================================
+   RESUMEN
+===================================================== */
+
+.daily-summary {
+
+    display: grid;
+
+    /* auto-fit: acomoda 3 tarjetas, o 4 si hay dato
+       de batería ese día, sin dejar columnas vacías */
+    grid-template-columns:
+        repeat(auto-fit, minmax(160px, 1fr));
+
+    gap: 12px;
+
+    margin-bottom: 14px;
+
+}
+
+
+.summary-card {
+
+    background: #f8fafc;
+
+    border: 1px solid #d7dde5;
+
+    border-radius: 9px;
+
+    padding: 17px;
+
+    text-align: center;
+
+    color: #172033;
+
+}
+
+
+.summary-card h3 {
+
+    margin: 0 0 8px;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+}
+
+
+.summary-card strong {
+
+    display: block;
+
+    font-size: 25px;
+
+    margin: 7px 0 10px;
+
+}
+
+
+.summary-card p {
+
+    margin: 4px 0;
+
+    color: #4b5563;
+
+    font-size: 12px;
+
+}
+
+
+/* =====================================================
+   COLORES DEL RESUMEN
+===================================================== */
+
+.temperature-card {
+
+    border-top: 4px solid #e53935;
+
+}
+
+
+.humidity-card {
+
+    border-top: 4px solid #008f7a;
+
+}
+
+
+.pressure-card {
+
+    border-top: 4px solid #7048a8;
+
+}
+
+
+.battery-card {
+
+    border-top: 4px solid #d69e00;
+
+}
+
+
+/* =====================================================
+   TARJETAS DE GRÁFICAS
+===================================================== */
+
+.chart-card {
+
+    background: #f8fafc;
+
+    border: 1px solid #d7dde5;
+
+    border-radius: 10px;
+
+    padding: 16px;
+
+    margin-bottom: 14px;
+
+}
+
+
+.chart-card h2 {
+
+    margin: 0 0 5px;
+
+    color: #172033;
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+}
+
+
+.chart-description {
+
+    color: #5b6472;
+
+    font-size: 12px;
+
+    margin-bottom: 12px;
+
+}
+
+
+/* =====================================================
+   CONTENEDOR DE LA GRÁFICA
+===================================================== */
+
+.chart-wrapper {
+
+    position: relative;
+
+    width: 100%;
+
+    height: 400px;
+
+    background: #ffffff !important;
+
+    border: 1px solid #d8dee7;
+
+    border-radius: 8px;
+
+    padding: 10px;
+
+    box-sizing: border-box;
+
+}
+
+
+/* =====================================================
+   CANVAS
+===================================================== */
+
+.chart-wrapper canvas {
+
+    background: #ffffff !important;
+
+}
+
+
+/* =====================================================
+   DIFERENCIAR CADA GRÁFICA
+===================================================== */
+
+.temperature-chart-card {
+
+    border-left: 5px solid #e53935;
+
+}
+
+
+.humidity-chart-card {
+
+    border-left: 5px solid #008f7a;
+
+}
+
+
+.pressure-chart-card {
+
+    border-left: 5px solid #7048a8;
+
+}
+
+
+/* =====================================================
+   SIN DATOS
+===================================================== */
+
+.no-data {
+
+    background: #f8fafc;
+
+    border: 1px solid #d7dde5;
+
+    border-radius: 10px;
+
+    padding: 40px 20px;
+
+    text-align: center;
+
+    color: #172033;
+
+}
+
+
+.no-data h2 {
+
+    margin-top: 0;
+
+    color: #172033;
+
+}
+
+
+.no-data p {
+
+    color: #5b6472;
+
+}
+
+
+/* =====================================================
+   EVITAR CAMBIO AUTOMÁTICO A MODO OSCURO
+===================================================== */
+
+@media (prefers-color-scheme: dark) {
+
+    .date-selector,
+    .summary-card,
+    .chart-card,
+    .chart-wrapper,
+    .no-data {
+
+        background: #ffffff !important;
+
+        color: #172033 !important;
+
+    }
+
+
+    .chart-wrapper canvas {
+
+        background: #ffffff !important;
+
+    }
+
+
+    .date-selector label,
+    .summary-card h3,
+    .chart-card h2,
+    .no-data h2 {
+
+        color: #172033 !important;
+
+    }
+
+
+    .summary-card p,
+    .chart-description,
+    .no-data p {
+
+        color: #4b5563 !important;
+
+    }
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 800px) {
+
+    .daily-summary {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .chart-wrapper {
+
+        height: 320px;
+
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .date-selector form {
+
+        align-items: stretch;
+
+        flex-direction: column;
+
+    }
+
+
+    .date-selector input,
+    .date-selector button {
+
+        width: 100%;
+
+        box-sizing: border-box;
+
+    }
+
+
+    .chart-card {
+
+        padding: 10px;
+
+    }
+
+
+    .chart-wrapper {
+
+        height: 280px;
+
+        padding: 5px;
+
+    }
+
+
+    .chart-card h2 {
+
+        font-size: 15px;
+
+    }
+
+}
