@@ -2,13 +2,74 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard Sensores ESP32</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estación Meteorológica</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/ambiente.css">
+    <!-- Chart.js por si agregas gráficas después -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <h1>Datos del ESP32 en Vivo</h1>
-    <div id="lecturas">Cargando datos...</div>
 
-    <!-- Aquí vinculas tu archivo JavaScript -->
-    <script src="script.js"></script>
+<div class="container">
+
+    <!-- ENCABEZADO -->
+    <header class="header">
+        <div class="header-info">
+            <h1>Estación Meteorológica</h1>
+            <p>Monitoreo ambiental mediante ESP32-C3</p>
+        </div>
+
+        <div class="clock-container">
+            <div id="digital-clock">00:00:00</div>
+            <div id="digital-date">Cargando...</div>
+        </div>
+
+        <div class="status">
+            <span class="status-dot"></span>
+            Sistema activo
+        </div>
+    </header>
+
+    <!-- NAVEGACIÓN -->
+    <nav class="main-nav">
+        <a href="index.html">Inicio</a>
+        <a href="graficas.html">Gráficas</a>
+    </nav>
+
+    <!-- DATOS ACTUALES (Se llenarán con JavaScript) -->
+    <section class="current-section">
+        <div class="section-title">
+            <h2>Datos actuales</h2>
+            <div class="last-update">Última medición: <strong id="val-timestamp">Cargando...</strong></div>
+        </div>
+
+        <section class="cards">
+            <div class="card temperature-card">
+                <div class="card-title">Temperatura</div>
+                <div class="card-value"><span id="val-temp">--</span><span class="card-unit">°C</span></div>
+            </div>
+
+            <div class="card humidity-card">
+                <div class="card-title">Humedad</div>
+                <div class="card-value"><span id="val-hum">--</span><span class="card-unit">%</span></div>
+            </div>
+
+            <div class="card pressure-card">
+                <div class="card-title">Presión atmosférica</div>
+                <div class="card-value"><span id="val-pres">--</span><span class="card-unit">mAtm</span></div>
+            </div>
+
+            <div class="card battery-card">
+                <div class="card-title">Batería</div>
+                <div class="card-value"><span id="val-bat">--</span><span class="card-unit">%</span></div>
+            </div>
+        </section>
+    </section>
+
+</div>
+
+<!-- SCRIPT QUE CONECTA CON GOOGLE APPS SCRIPT -->
+<script src="js/app.js"></script>
 </body>
 </html>
