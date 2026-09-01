@@ -252,3 +252,46 @@ if (ultimo.bateria !== undefined) {
         headerBatteryContainer.style.display = 'none';
     }
 }
+let miGrafica = null;
+
+function renderizarGrafica(etiquetas, datosTemperatura, datosHumedad) {
+    const ctx = document.getElementById('graficaSensores').getContext('2d');
+    
+    if (miGrafica) {
+        miGrafica.destroy(); // Destruye la gráfica anterior para evitar solapamientos al actualizar
+    }
+
+    miGrafica = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: etiquetas, // Ejemplo: ['12:00', '12:05', '12:10']
+            datasets: [
+                {
+                    label: 'Temperatura (°C)',
+                    data: datosTemperatura,
+                    borderColor: '#ff6384',
+                    tension: 0.2
+                },
+                {
+                    label: 'Humedad (%)',
+                    data: datosHumedad,
+                    borderColor: '#36a2eb',
+                    tension: 0.2
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+}
+// Ejemplo de llamada tras recibir los datos de Google Sheets
+function actualizarDashboard(registros) {
+    // Suponiendo que 'registros' es un array de objetos con la data
+    const etiquetas = registros.map(r => r.hora);
+    const temperaturas = registros.map(r => parseFloat(r.temperatura));
+    const humedades = registros.map(r => parseFloat(r.humedad));
+
+    renderizarGrafica(etiquetas, temperaturas, humedades);
+}
