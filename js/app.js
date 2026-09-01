@@ -206,3 +206,49 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
+// =====================================================
+// FUNCIONES DE BATERÍA (Equivalente a bateria.php)
+// =====================================================
+
+function bateriaAPorcentaje(valorCrudo) {
+    if (valorCrudo === null || valorCrudo === "" || valorCrudo === undefined) {
+        return null;
+    }
+
+    // Si viene como texto con coma, la cambiamos por punto
+    if (typeof valorCrudo === 'string') {
+        valorCrudo = valorCrudo.replace(',', '.').trim();
+    }
+
+    let numero = parseFloat(valorCrudo);
+    if (isNaN(numero)) return null;
+
+    let porcentaje = Math.round(numero);
+    return Math.max(0, Math.min(100, porcentaje));
+}
+
+function bateriaClaseNivel(porcentaje) {
+    if (porcentaje === null) return "battery-desconocida";
+    if (porcentaje <= 20) return "battery-baja";
+    if (porcentaje <= 60) return "battery-media";
+    return "battery-alta";
+}
+
+// Dentro de tu función cargarDatosESP32(), justo donde procesas los datos:
+if (ultimo.bateria !== undefined) {
+    const valorBateria = bateriaAPorcentaje(ultimo.bateria);
+    const claseBateria = bateriaClaseNivel(valorBateria);
+
+    const valBat = document.getElementById('val-bat');
+    if (valBat) valBat.innerText = valorBateria !== null ? valorBateria : '--';
+
+    // Si tienes un contenedor específico para el Badge de batería en el header:
+    const headerBatteryContainer = document.getElementById('header-battery-badge');
+    if (headerBatteryContainer && valorBateria !== null) {
+        headerBatteryContainer.className = `battery-badge ${claseBateria}`;
+        headerBatteryContainer.innerHTML = `<span class="battery-icon">🔋</span><span class="battery-value">${valorBateria}%</span>`;
+        headerBatteryContainer.style.display = 'flex';
+    } else if (headerBatteryContainer) {
+        headerBatteryContainer.style.display = 'none';
+    }
+}
